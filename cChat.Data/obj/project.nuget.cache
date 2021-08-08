@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "8uJ2cnQAnXLSyQ8BJXSWHAGB9BK0Y7A5zUaf9qOsaAJcXm5ReohhL4OLs5bOP8fNKEUPfGPnY7qKSdgh9zTvpg==",
+  "dgSpecHash": "xBVzJqg3WH4WJ27pmq45K3I62z0yuxF0W319uYh0kPZUDSslhbaTd/OOZ3h6pitN0JI/fib6ficXeDTVqlHkQA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.Data\\cChat.Data.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Intellisys\\.nuget\\packages\\autofac\\6.2.0\\autofac.6.2.0.nupkg.sha512",
+    "C:\\Users\\Intellisys\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"
+  ],
   "logs": []
 }

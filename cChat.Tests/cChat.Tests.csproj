@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="coverlet.collector" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Data\" />
+    <Folder Include="BusinessLogic\" />
+    <Folder Include="Bots\" />
+    <Folder Include="Portal\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cChat.Bots\cChat.Bots.csproj" />
+    <ProjectReference Include="..\cChat\cChat.Portal.csproj" />
+  </ItemGroup>
+
+</Project>

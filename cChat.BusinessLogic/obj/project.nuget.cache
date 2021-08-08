@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "DNXp+p2kQRKjxKYZehCyucAQyeawsXO3rtOsnHIchckTwS6p90SMsAtO8R7mcwntA+70CBY8AXqn6+JUlr+cfA==",
+  "dgSpecHash": "nvUBzW1oXAeVzU34GuKEtSn2aWHPqWrcZuhBMtmkgkvecW96CxLDcPeHcnnlSgAAtEoXeCxeGGL08cAgy1s4GQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.BusinessLogic\\cChat.BusinessLogic.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Intellisys\\.nuget\\packages\\autofac\\6.2.0\\autofac.6.2.0.nupkg.sha512",
+    "C:\\Users\\Intellisys\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"
+  ],
   "logs": []
 }
