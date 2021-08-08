@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "cChat.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/cChat.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/cChat.Core.dll": {}
+        }
+      },
+      "cChat.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "cChat.Core": "1.0.0",
+          "cChat.Entities": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/cChat.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/cChat.Data.dll": {}
+        }
+      },
+      "cChat.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/cChat.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/cChat.Entities.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "cChat.Core/1.0.0": {
+      "type": "project",
+      "path": "../cChat.Core/cChat.Core.csproj",
+      "msbuildProject": "../cChat.Core/cChat.Core.csproj"
+    },
+    "cChat.Data/1.0.0": {
+      "type": "project",
+      "path": "../cChat.Data/cChat.Data.csproj",
+      "msbuildProject": "../cChat.Data/cChat.Data.csproj"
+    },
+    "cChat.Entities/1.0.0": {
+      "type": "project",
+      "path": "../cChat.Entities/cChat.Entities.csproj",
+      "msbuildProject": "../cChat.Entities/cChat.Entities.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "cChat.Data >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Intellisys\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.BusinessLogic\\cChat.BusinessLogic.csproj",
+      "projectName": "cChat.BusinessLogic",
+      "projectPath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.BusinessLogic\\cChat.BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\Intellisys\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.BusinessLogic\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Intellisys\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://nuget.syncfusion.com/wpf": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.Data\\cChat.Data.csproj": {
+              "projectPath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat.Data\\cChat.Data.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

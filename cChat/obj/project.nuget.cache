@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CQ39TGh9QrZ66eNXIEG/KoOHW+6ubJj2f/o0vVhubnOUhojduMOzBVQYbeV41f8qarJoNjmyjep+jkj9lJL04w==",
+  "dgSpecHash": "RuKoXChB4ipgiBsllKGr8uBI0Oo44LZ/8EnKt5m5JhCCR6RQhq1tT5TQuyRdegAg7ltpvorgZITg9a+5W/gifw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat\\cChat.csproj",
+  "projectFilePath": "C:\\Users\\Intellisys\\source\\repos\\cChat\\cChat\\cChat.Portal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Intellisys\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Intellisys\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.8\\microsoft.aspnetcore.cryptography.internal.5.0.8.nupkg.sha512",

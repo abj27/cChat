@@ -1,6 +1,4 @@
-using System;
-
-namespace cChat.Models
+namespace cChat.Portal.Models
 {
     public class ErrorViewModel
     {
