@@ -1,4 +1,6 @@
-﻿namespace cChat.Data.Repositories
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace cChat.Data.Repositories
 {
     public class ChatRoomRepository : IChatRoomRepository
     {

@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\cChat.Core\cChat.Core.csproj" />
-    <ProjectReference Include="..\cChat.Entities\cChat.Entities.csproj" />
   </ItemGroup>
 
 </Project>
