@@ -26,6 +26,9 @@
       "cChat.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Autofac": "4.2.0"
+        },
         "compile": {
           "bin/placeholder/cChat.Core.dll": {}
         },

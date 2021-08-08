@@ -1,0 +1,17 @@
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Data.deps.json
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Data.dll
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\ref\cChat.Data.dll
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Data.pdb
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Core.dll
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Entities.dll
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Core.pdb
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\bin\Debug\net5.0\cChat.Entities.pdb
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.csproj.AssemblyReference.cache
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.AssemblyInfoInputs.cache
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.AssemblyInfo.cs
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.csproj.CoreCompileInputs.cache
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.csproj.CopyComplete
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.dll
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\ref\cChat.Data.dll
+C:\Users\Intellisys\source\repos\cChat\cChat.Data\obj\Debug\net5.0\cChat.Data.pdb

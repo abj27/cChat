@@ -2236,14 +2236,45 @@
           "bin/placeholder/cChat.Bots.dll": {}
         }
       },
+      "cChat.BusinessLogic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "cChat.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/cChat.BusinessLogic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/cChat.BusinessLogic.dll": {}
+        }
+      },
       "cChat.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Autofac": "4.2.0"
+        },
         "compile": {
           "bin/placeholder/cChat.Core.dll": {}
         },
         "runtime": {
           "bin/placeholder/cChat.Core.dll": {}
+        }
+      },
+      "cChat.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Autofac": "6.2.0",
+          "cChat.Core": "1.0.0",
+          "cChat.Entities": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/cChat.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/cChat.Data.dll": {}
         }
       },
       "cChat.Entities/1.0.0": {
@@ -2266,7 +2297,8 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.8",
           "Microsoft.AspNetCore.Identity.UI": "5.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.8",
-          "Microsoft.EntityFrameworkCore.Tools": "5.0.8"
+          "Microsoft.EntityFrameworkCore.Tools": "5.0.8",
+          "cChat.BusinessLogic": "1.0.0"
         },
         "compile": {
           "bin/placeholder/cChat.Portal.dll": {}
@@ -7977,10 +8009,20 @@
       "path": "../cChat.Bots/cChat.Bots.csproj",
       "msbuildProject": "../cChat.Bots/cChat.Bots.csproj"
     },
+    "cChat.BusinessLogic/1.0.0": {
+      "type": "project",
+      "path": "../cChat.BusinessLogic/cChat.BusinessLogic.csproj",
+      "msbuildProject": "../cChat.BusinessLogic/cChat.BusinessLogic.csproj"
+    },
     "cChat.Core/1.0.0": {
       "type": "project",
       "path": "../cChat.Core/cChat.Core.csproj",
       "msbuildProject": "../cChat.Core/cChat.Core.csproj"
+    },
+    "cChat.Data/1.0.0": {
+      "type": "project",
+      "path": "../cChat.Data/cChat.Data.csproj",
+      "msbuildProject": "../cChat.Data/cChat.Data.csproj"
     },
     "cChat.Entities/1.0.0": {
       "type": "project",
