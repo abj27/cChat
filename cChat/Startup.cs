@@ -1,4 +1,4 @@
-using cChat.Portal.Data;
+using cChat.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

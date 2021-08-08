@@ -1485,6 +1485,9 @@
         }
       },
       "cChat.Core/1.0.0": {
+        "dependencies": {
+          "Autofac": "6.2.0"
+        },
         "runtime": {
           "cChat.Core.dll": {}
         },
@@ -1495,6 +1498,9 @@
       "cChat.Data/1.0.0": {
         "dependencies": {
           "Autofac": "6.2.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.8",
+          "Microsoft.EntityFrameworkCore": "5.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.8",
           "cChat.Core": "1.0.0",
           "cChat.Entities": "1.0.0"
         },
