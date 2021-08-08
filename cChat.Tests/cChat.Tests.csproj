@@ -18,6 +18,7 @@
     <Folder Include="Data\" />
     <Folder Include="BusinessLogic\" />
     <Folder Include="Bots\" />
+    <Folder Include="Hubs\" />
     <Folder Include="Portal\" />
   </ItemGroup>
 

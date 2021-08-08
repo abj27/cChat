@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.Portal", "cChat\cChat.Portal.csproj", "{4BB09333-A037-4D2F-AC80-B9DBD684200D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.Portal", "cChat\cChat.Portal.csproj", "{4BB09333-A037-4D2F-AC80-B9DBD684200D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.Data", "cChat.Data\cChat.Data.csproj", "{A8838C0B-742A-4D9E-9882-101942482062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.Data", "cChat.Data\cChat.Data.csproj", "{A8838C0B-742A-4D9E-9882-101942482062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.BusinessLogic", "cChat.BusinessLogic\cChat.BusinessLogic.csproj", "{7F64057A-D69D-4864-85A9-D9F8FF0CAFF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.BusinessLogic", "cChat.BusinessLogic\cChat.BusinessLogic.csproj", "{7F64057A-D69D-4864-85A9-D9F8FF0CAFF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.Core", "cChat.Core\cChat.Core.csproj", "{6AD5F68E-FF5A-47CC-BFFE-976B11B870CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.Core", "cChat.Core\cChat.Core.csproj", "{6AD5F68E-FF5A-47CC-BFFE-976B11B870CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.Entities", "cChat.Entities\cChat.Entities.csproj", "{D22593FA-CCD5-4241-B39C-2FD754CDF9FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.Entities", "cChat.Entities\cChat.Entities.csproj", "{D22593FA-CCD5-4241-B39C-2FD754CDF9FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.Bots", "cChat.Bots\cChat.Bots.csproj", "{8297B771-777A-41F8-895D-072D00B4D623}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.Bots", "cChat.Bots\cChat.Bots.csproj", "{8297B771-777A-41F8-895D-072D00B4D623}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cChat.Tests", "cChat.Tests\cChat.Tests.csproj", "{EC1CAB9A-EFEE-429A-BCA2-88C010026D73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cChat.Tests", "cChat.Tests\cChat.Tests.csproj", "{EC1CAB9A-EFEE-429A-BCA2-88C010026D73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
