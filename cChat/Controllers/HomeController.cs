@@ -20,7 +20,6 @@ namespace cChat.Portal.Controllers
 
         public IActionResult Index()
         {
-             _chatRoomService.GetAll();
             return View();
         }
 

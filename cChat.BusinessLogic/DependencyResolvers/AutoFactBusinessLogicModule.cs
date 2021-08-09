@@ -9,6 +9,7 @@ namespace cChat.BusinessLogic.DependencyResolvers
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ChatRoomService>().As<IChatRoomService>();
+            builder.RegisterType<MessageParserService>().As<IMessageParserService>();
         }
     }
 }

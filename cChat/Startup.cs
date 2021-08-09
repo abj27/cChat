@@ -27,25 +27,25 @@ namespace cChat.Portal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-            // services.AddMassTransit( x =>{ 
-                // x.UsingInMemory();
-            // });
-            services.AddMassTransit( x =>{
+            services.AddMassTransit(x =>
+            {
                 x.AddConsumer<BotMessageSent>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.ReceiveEndpoint("botMessageSent", e =>
-                    {
-                        e.ConfigureConsumer<BotMessageSent>(context);
-                    });
+                    cfg.ReceiveEndpoint("botMessageSent", e => { e.ConfigureConsumer<BotMessageSent>(context); });
                 });
             });
             services.AddMassTransitHostedService();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+            });
             services.AddControllersWithViews();
-            services.AddSignalR();
+            services.AddSignalR( x=> x.EnableDetailedErrors= true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +62,7 @@ namespace cChat.Portal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

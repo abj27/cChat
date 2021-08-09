@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using cChat.BusinessLogic.Services;
 using cChat.Core.DTOs;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace cChat.Portal.Hubs
 {
@@ -13,16 +16,19 @@ namespace cChat.Portal.Hubs
     {
         private readonly IBus _busService;
         private readonly IMessageParserService _messageParserService;
+        private UserManager<IdentityUser> _userManager;
 
-        public ChatHub(IBus busService, IMessageParserService messageParserService)
+        public ChatHub(IBus busService, IMessageParserService messageParserService, UserManager<IdentityUser> userManager)
         {
             _busService = busService;
             _messageParserService = messageParserService;
+             _userManager = userManager;
         }
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string message)
         {
-            var parsedMessage = _messageParserService.Parse(message);
+            var user = await _userManager.GetUserAsync(Context.User);
+            var parsedMessage = _messageParserService.Parse(message, user);
             switch (parsedMessage.Type)
             {
                 case MessageTypes.BotAction:
@@ -49,21 +55,4 @@ namespace cChat.Portal.Hubs
         }
     }
 
-    public enum MessageTypes
-    {
-        BotAction,
-        ChatMessage
-    }
-
-    public interface IMessageParserService
-    {
-        ParsedChatMessage Parse(string message);
-    }
-
-    public class ParsedChatMessage
-    {
-        public MessageTypes Type { get; set; }
-        public string Sender { get; set; }
-        public string Text { get; set; }
-    }
 }
