@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace cChat.Data.Entities
 {
     
+    [Index(nameof(Name), IsUnique = true)]
     public class ChatRoom: IAuditableEntity<int>
     {
         public int Id { get; set; }

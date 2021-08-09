@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MassTransit;
 
 namespace cChat.Portal
 {
@@ -26,6 +27,20 @@ namespace cChat.Portal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+            // services.AddMassTransit( x =>{ 
+                // x.UsingInMemory();
+            // });
+            services.AddMassTransit( x =>{
+                x.AddConsumer<BotMessageSent>();
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.ReceiveEndpoint("botMessageSent", e =>
+                    {
+                        e.ConfigureConsumer<BotMessageSent>(context);
+                    });
+                });
+            });
+            services.AddMassTransitHostedService();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -64,5 +79,9 @@ namespace cChat.Portal
                 endpoints.MapRazorPages();
             });
         }
+    }
+
+    public class BotMessageSent : IConsumer
+    {
     }
 }
