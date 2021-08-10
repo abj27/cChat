@@ -23,29 +23,37 @@ namespace cChat.Portal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ChatHub>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddMassTransit(x =>
             {
-                x.AddConsumer<BotMessageSent>();
+                x.AddConsumer<BotChatMessageConsumer>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.ReceiveEndpoint("botMessageSent", e => { e.ConfigureConsumer<BotMessageSent>(context); });
+                    cfg.ReceiveEndpoint("bot-chat-message-queue", e => { e.ConfigureConsumer<BotChatMessageConsumer>(context); });
                 });
             });
             services.AddMassTransitHostedService();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
             {
                 microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
                 microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
             });
+
             services.AddControllersWithViews();
-            services.AddSignalR( x=> x.EnableDetailedErrors= true);
+
+            services.AddSignalR( x=> {
+                x.EnableDetailedErrors= true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,9 +88,5 @@ namespace cChat.Portal
                 endpoints.MapRazorPages();
             });
         }
-    }
-
-    public class BotMessageSent : IConsumer
-    {
     }
 }

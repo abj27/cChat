@@ -40,6 +40,11 @@ namespace cChat.Portal.Hubs
         {
             var user = await _userManager.GetUserAsync(Context.User);
             var parsedMessage = _messageParserService.Parse(message, user);
+            await SendSystemMessage(parsedMessage);
+        }
+
+        public async Task SendSystemMessage(ParsedChatMessage parsedMessage)
+        {
             switch (parsedMessage.Type)
             {
                 case MessageTypes.BotAction:
@@ -50,9 +55,19 @@ namespace cChat.Portal.Hubs
                     await HandleChatMessage(parsedMessage);
                     break;
                 }
+                case MessageTypes.ErrorMessage:
+                {
+                    await HandleErrorMessage(parsedMessage);
+                    break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private async Task HandleErrorMessage(ParsedChatMessage parsedMessage)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", parsedMessage);
         }
 
         private async Task HandleChatMessage(ParsedChatMessage parsedMessage)
@@ -83,6 +98,7 @@ namespace cChat.Portal.Hubs
             // await endPoint.Send(new BotAction(parsedChatMessage.Text));
             await endPoint.Send(parsedChatMessage);
         }
+
     }
 
 }

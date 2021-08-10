@@ -1,26 +1,23 @@
-﻿using cChat.Bots.Services;
+﻿using System.Threading.Tasks;
+using cChat.Bots.Services;
 using cChat.Core.DTOs;
 
 namespace cChat.Bots.RobotActionHandlers
 {
-    public class DefaultActionHandler:IRobotIActionHandler
+    public class DefaultActionHandler: RobotActionHandler, IRobotIActionHandler
     {
-        private readonly ISendMessageService _sendMessageService;
-
-        public DefaultActionHandler(ISendMessageService sendMessageService)
+        public DefaultActionHandler(ISendMessageService sendMessageService) : base(sendMessageService)
+        { }
+        public override string Key => null; 
+        public override  async Task HandleMessage(string message)
         {
-            _sendMessageService = sendMessageService;
-            Key = null;
+            await SendMessageService.Send(new ParsedChatMessage
+            {
+                Type = MessageTypes.ErrorMessage,
+                Text = "Bot not found",
+                SenderName = "System",
+                Sender = null
+            });
         }
-        public void Process(string message)
-        {
-           _sendMessageService.Send(new ParsedChatMessage{
-               Type = MessageTypes.ErrorMessage,
-               Text = "Bot not found",
-               SenderName = "System",
-               Sender = null 
-           });;
-        }
-        public string Key { get;}
     }
 }

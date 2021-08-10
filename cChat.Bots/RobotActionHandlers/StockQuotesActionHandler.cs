@@ -1,17 +1,37 @@
-﻿namespace cChat.Bots.RobotActionHandlers
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using cChat.Bots.Services;
+using cChat.Core.DTOs;
+using ServiceStack;
+
+namespace cChat.Bots.RobotActionHandlers
 {
-    public class StockQuotesActionHandler: IRobotIActionHandler
+    public class StockQuotesActionHandler:RobotActionHandler, IRobotIActionHandler
     {
-        public StockQuotesActionHandler(string key)
+        public StockQuotesActionHandler(ISendMessageService sendMessageService) : base(sendMessageService)
         {
-            Key = key;
+        }
+        public override string Key => "stock" ;
+        public string GetUrl(string query)
+        {
+            return $@"https://stooq.com/q/l/?s={query}&f=sd2t2ohlcv&h&e=csv";
         }
 
-        public void Process(string message)
+        public override async Task HandleMessage(string message)
         {
-            throw new System.NotImplementedException();
+           var content = await GetUrl(message)
+               .GetStringFromUrlAsync(accept:"text/csv");
+           var quotes = content.FromCsv<IList<StockQuote>>();
+            var outputMessage= "";
+           if(quotes.Any())
+            {
+              outputMessage = quotes.First().GetQuote();
+            }
+            // await SendMessageService.Send(new ParsedChatMessage(){ 
+            //     Type = MessageTypes.ErrorMessage,
+            // });
         }
-
-        public string Key { get; }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace cChat.Bots.RobotActionHandlers
+﻿using System.Threading.Tasks;
+
+namespace cChat.Bots.RobotActionHandlers
 {
     public interface IRobotIActionHandler
     {
-        void Process(string message);
         string Key { get; }
+        Task Process(string message);
     }
 }

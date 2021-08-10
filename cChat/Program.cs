@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using cChat.BusinessLogic.DependencyResolvers;
 using cChat.Core.DependencyResolvers;
 using cChat.Data.DependencyResolvers;
+using cChat.Portal.Hubs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 

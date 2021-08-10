@@ -12,16 +12,16 @@ namespace cChat.Bots
 {
     public class BotActionConsumer: IConsumer<ParsedChatMessage>
     {
-        // private readonly IActionHandlerService _actionHandlerService;
+        private readonly IActionHandlerService _actionHandlerService;
 
-        public BotActionConsumer()
+        public BotActionConsumer(IActionHandlerService actionHandlerService)
         {
-            // _actionHandlerService = actionHandlerService;
+            _actionHandlerService = actionHandlerService;
         }
 
         public async Task Consume(ConsumeContext<ParsedChatMessage> context)
         {
-            // _actionHandlerService.Process(new BotAction(context.Message.Text));
+            _actionHandlerService.Process(new BotAction(context.Message.Text));
             await Task.Run(() => { 
                var a= context.Message;
             });
