@@ -7,14 +7,14 @@ namespace cChat.Data.Entities
 {
     
     [Index(nameof(Name), IsUnique = true)]
-    public class ChatRoom: IAuditableEntity<int>
+    public class ChatRoom: IAuditableEntity, IEntity<int>
     {
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
         public string Name {get; set;}
-        public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
         public List<ChatMessage> ChatMessages {get; set;} = new List<ChatMessage>();
     }
 }

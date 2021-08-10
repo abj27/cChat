@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace cChat.Data.Entities
 {
-    public class ChatMessage :IAuditableEntity<long>
+    public class ChatMessage :IAuditableEntity, IEntity<long>
     {
         public long Id { get; set; }
         [MaxLength(450)]
@@ -18,7 +18,7 @@ namespace cChat.Data.Entities
         [Required]
         [MaxLength(300)]
         public string Message{get; set;}
-        public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }

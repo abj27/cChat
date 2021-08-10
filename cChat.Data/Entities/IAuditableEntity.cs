@@ -2,9 +2,9 @@
 
 namespace cChat.Data.Entities
 {
-    public interface IAuditableEntity<T>:IEntity<T>
+    public interface IAuditableEntity
     {
-        public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }

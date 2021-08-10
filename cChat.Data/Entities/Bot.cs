@@ -7,7 +7,7 @@ namespace cChat.Data.Entities
 {
     [Index(nameof(Key), IsUnique = true)]
     [Index(nameof(Name), IsUnique = true)]
-    public class Bot :IAuditableEntity<int>
+    public class Bot :IAuditableEntity, IEntity<int>
     {
         public int Id { get; set; }
         [Required]
@@ -16,7 +16,7 @@ namespace cChat.Data.Entities
         [MaxLength(20)]
         [Required]
         public string Key {get; set;}
-        public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }

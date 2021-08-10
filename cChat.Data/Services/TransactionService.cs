@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace cChat.Data.Services
 {
-    public interface ITransactionService
-    {
-        T InTransaction<T>(Func<T> action);
-    }
-
     public class TransactionService : ITransactionService
     {
         private readonly IApplicationDbContext _applicationDbContext;
@@ -19,13 +14,13 @@ namespace cChat.Data.Services
         {
             _applicationDbContext = applicationDbContext;
         }
-        public T InTransaction<T>(Func<T> action)
+        public T InTransaction<T>(Func<IApplicationDbContext, T> action)
         {
             using (var transaction = _applicationDbContext.Instance.Database.BeginTransaction())
             {
                 try
                 {
-                    var result = action();
+                    var result = action(_applicationDbContext);
                     _applicationDbContext.Instance.SaveChanges();
                     transaction.Commit();
                     return result;

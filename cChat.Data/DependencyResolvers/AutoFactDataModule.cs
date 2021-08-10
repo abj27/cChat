@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using cChat.Data.Repositories;
+using cChat.Data.Services;
 
 namespace cChat.Data.DependencyResolvers
 {
@@ -8,6 +9,8 @@ namespace cChat.Data.DependencyResolvers
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ChatRoomRepository>().As<IChatRoomRepository>();
+            builder.RegisterType<ChatMessageRepository>().As<IChatMessageRepository>();
+            builder.RegisterType<TransactionService>().As<ITransactionService>();
         }
     }
 }
