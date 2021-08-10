@@ -7,10 +7,6 @@ using cChat.Data.Entities;
 
 namespace cChat.Data.Repositories
 {
-    public interface IChatMessageRepository:IRepository<ChatMessage, long>
-    {
-    }
-
     public class ChatMessageRepository: Repository<ChatMessage,long>, IChatMessageRepository
     {
         public ChatMessageRepository(IApplicationDbContext applicationDbContext) : base(applicationDbContext)

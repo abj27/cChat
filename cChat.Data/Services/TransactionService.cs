@@ -14,13 +14,13 @@ namespace cChat.Data.Services
         {
             _applicationDbContext = applicationDbContext;
         }
-        public T InTransaction<T>(Func<IApplicationDbContext, T> action)
+        public async Task<T> InTransaction<T>(Func<Task<T>> action, Func<Task> onError)
         {
             using (var transaction = _applicationDbContext.Instance.Database.BeginTransaction())
             {
                 try
                 {
-                    var result = action(_applicationDbContext);
+                    var result = await action();
                     _applicationDbContext.Instance.SaveChanges();
                     transaction.Commit();
                     return result;
@@ -30,6 +30,10 @@ namespace cChat.Data.Services
                 {
                     Console.WriteLine(e.Message);
                     transaction.Rollback();
+                    if (onError != null)
+                    {
+                        await onError();
+                    }
                     return default(T);
 
                 }

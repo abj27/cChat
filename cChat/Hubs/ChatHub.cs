@@ -7,6 +7,7 @@ using cChat.BusinessLogic.Services;
 using cChat.Core.DTOs;
 using cChat.Data.Entities;
 using cChat.Data.Repositories;
+using cChat.Data.Services;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Identity;
@@ -20,15 +21,19 @@ namespace cChat.Portal.Hubs
     {
         private readonly IBus _busService;
         private readonly IMessageParserService _messageParserService;
-        private UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IChatMessageRepository _chatMessageRepository;
+        private readonly IChatRoomRepository _chatRoomRepository;
+        private readonly ITransactionService _transactionService;
 
-        public ChatHub(IBus busService, IMessageParserService messageParserService, UserManager<IdentityUser> userManager, IChatMessageRepository chatMessageRepository)
+        public ChatHub(IBus busService, IMessageParserService messageParserService, UserManager<IdentityUser> userManager, IChatMessageRepository chatMessageRepository, IChatRoomRepository chatRoomRepository, ITransactionService transactionService)
         {
             _busService = busService;
             _messageParserService = messageParserService;
             _userManager = userManager;
             _chatMessageRepository = chatMessageRepository;
+            _chatRoomRepository = chatRoomRepository;
+            _transactionService = transactionService;
         }
 
         public async Task SendMessage(string message)
@@ -52,16 +57,30 @@ namespace cChat.Portal.Hubs
 
         private async Task HandleChatMessage(ParsedChatMessage parsedMessage)
         {
-            _chatMessageRepository.Insert(new ChatMessage{
-                UserId = parsedMessage.Sender,
-                ChatRoomId = 1,
-                Message = parsedMessage.Text
-            });;
-            await Clients.All.SendAsync("ReceiveMessage", parsedMessage);
+            await _transactionService.InTransaction(async () =>
+            {
+                var entity =_chatMessageRepository.Insert(new ChatMessage
+                {
+                    UserId = parsedMessage.Sender,
+                    //We can only have a single chat room in the system at the moment 
+                    ChatRoomId = _chatRoomRepository.GetAll().Select(x =>x.Id).First(),
+                    Message = parsedMessage.Text
+                });
+                await Clients.All.SendAsync("ReceiveMessage", parsedMessage);
+                return entity;
+            },
+            onError:async     () =>{
+                await Clients.Caller.SendAsync("ReceiveMessage", new ParsedChatMessage{
+                   Type = MessageTypes.ErrorMessage,
+                   SenderName = "System",
+                   Text = $"Sorry, We couldn't send the message {parsedMessage.Text}"
+                });
+            });
         }
         private async Task HandleBotAction(ParsedChatMessage parsedChatMessage)
         {
-            var endPoint = await _busService.GetSendEndpoint(new Uri("rabbitmq://localhost/robotActionsQueue"));
+            var endPoint = await _busService.GetSendEndpoint(new Uri("rabbitmq://localhost/bot-actions-queue"));
+            // await endPoint.Send(new BotAction(parsedChatMessage.Text));
             await endPoint.Send(parsedChatMessage);
         }
     }

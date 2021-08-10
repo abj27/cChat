@@ -21,11 +21,12 @@ namespace cChat.Data.Repositories
         {
             return _applicationDbContext.Instance.Set<T>().Find(id);
         }
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity");
             _applicationDbContext.Instance.Add(entity);
             _applicationDbContext.Instance.SaveChanges();
+            return entity;
         }
         public void Update(T entity)
         {

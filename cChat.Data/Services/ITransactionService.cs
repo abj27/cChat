@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace cChat.Data.Services
 {
     public interface ITransactionService
     {
-        public T InTransaction<T>(Func<IApplicationDbContext, T> action);
+        public Task<T> InTransaction<T>(Func<Task<T>> action, Func<Task> onError =null);
     }
 }

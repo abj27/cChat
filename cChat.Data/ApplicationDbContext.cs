@@ -65,7 +65,7 @@ namespace cChat.Data
         {
             foreach (var entry in ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified))
             {
-                ((IAuditableEntity)entry).ModifiedDate= DateTimeOffset.Now;
+                entry.Entity.ModifiedDate= DateTimeOffset.Now;
             }
         }
 
@@ -73,7 +73,7 @@ namespace cChat.Data
         {
             foreach (var entry in ChangeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added))
             {
-                ((IAuditableEntity)entry).CreatedDate = DateTimeOffset.Now;
+                entry.Entity.CreatedDate = DateTimeOffset.Now;
             }
         }
     }

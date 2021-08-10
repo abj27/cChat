@@ -1,75 +1,59 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autofac;
+using cChat.Bots.Publishers;
+using cChat.Bots.RobotActionHandlers;
+using cChat.Bots.Services;
 using MassTransit;
 
 namespace cChat.Bots
 {
-    class Program
+    static class Program
     {
-        public static async Task Main()
+        private static IContainer GetDependencyInjectionRoot()
         {
-            var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
-            {
-                cfg.ReceiveEndpoint("BotActionsQueue", e =>
-                {
-                    e.Consumer<BotActionConsumer>();
+            var builder = new ContainerBuilder();
+            builder.RegisterType<SendMessageService>().As<ISendMessageService>();
+            builder.RegisterType<ActionHandlerService>().As<IActionHandlerService>();
+            builder.RegisterType<Application>();
+            builder.RegisterAssemblyTypes(typeof(DefaultActionHandler).Assembly).Where(x => x.Name.EndsWith("ActionHandler")).AsImplementedInterfaces(); 
+            builder.AddMassTransit(x =>{
+                x.AddConsumer<BotActionConsumer>();
+                x.UsingRabbitMq((context, config) =>{
+                    config.Host("localhost");
+                    config.ReceiveEndpoint("bot-actions-queue", e =>
+                    {
+                        e.ConfigureConsumer<BotActionConsumer>(context);
+                    });
                 });
             });
+            var container = builder.Build();
+            return container;
+        }
 
-            // var busControl = Bus.Factory.CreateUsingInMemory(cfg =>
-            // {
-            //     cfg.ReceiveEndpoint("event-listener", e =>
-            //     {
-            //         e.Consumer<EventConsumer>();
-            //     });
-            // });
-            var source = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-
-            await busControl.StartAsync(source.Token);
+        public static async Task Main()
+        {
+            var busControl = await SetupMessageBroker(GetDependencyInjectionRoot());
             try
             {
+                await GetDependencyInjectionRoot().Resolve<Application>().Run();
                 Console.WriteLine("Press enter to exit");
-
                 await Task.Run(() => Console.ReadLine());
             }
             finally
             {
                 await busControl.StopAsync();
             }
-            //  try
-            // {
-            //     while (true)
-            //     {
-            //         string value = await Task.Run(() =>
-            //         {
-            //             Console.WriteLine("Enter message (or quit to exit)");
-            //             Console.Write("> ");
-            //             return Console.ReadLine();
-            //         });
-            //
-            //         if("quit".Equals(value, StringComparison.OrdinalIgnoreCase))
-            //             break;
-            //
-            //         await busControl.Publish<ValueEntered>(new
-            //         {
-            //             Value = value
-            //         });
-            //     }
-            // }
-            // finally
-            // {
-            //     await busControl.StopAsync();
-            // }
         }
 
-        class EventConsumer :
-            IConsumer<ValueEntered>
+        private static async Task<IBusControl> SetupMessageBroker(IContainer container)
         {
-            public async Task Consume(ConsumeContext<ValueEntered> context)
-            {
-                Console.WriteLine("Value: {0}", context.Message.Value);
-            }
+            var source = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+            var busControl = container.Resolve<IBusControl>();
+            await busControl.StartAsync(source.Token);
+            busControl.Start();
+            return busControl;
         }
     }
 

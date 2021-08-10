@@ -2,7 +2,7 @@
 
 namespace cChat.Data.Repositories
 {
-    public interface IChatRoomRepository:IRepository<ChatRoom, int>
+    public interface IChatMessageRepository:IRepository<ChatMessage, long>
     {
     }
 }

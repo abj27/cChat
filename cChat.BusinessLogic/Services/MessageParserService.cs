@@ -9,7 +9,7 @@ namespace cChat.BusinessLogic.Services
         {
             return  new ParsedChatMessage{ 
                 Text = message,
-                Type = MessageTypes.ChatMessage, 
+                Type = MessageTypes.BotAction, 
                 SenderName = user.NormalizedUserName,
                 Sender = user.Id
             };

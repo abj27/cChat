@@ -3,6 +3,7 @@
     public enum MessageTypes
     {
         BotAction,
-        ChatMessage
+        ChatMessage,
+        ErrorMessage          
     }
 }

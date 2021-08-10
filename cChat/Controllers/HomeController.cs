@@ -2,6 +2,7 @@
 using cChat.BusinessLogic.Services;
 using cChat.Data.Repositories;
 using cChat.Portal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,19 +11,19 @@ namespace cChat.Portal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly  IChatRoomService _chatRoomService;
 
-        public HomeController(ILogger<HomeController> logger, IChatRoomService chatRoomService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _chatRoomService= chatRoomService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
