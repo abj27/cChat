@@ -22,9 +22,6 @@ namespace cChat.Bots
         public async Task Consume(ConsumeContext<ParsedChatMessage> context)
         {
             _actionHandlerService.Process(new BotAction(context.Message.Text));
-            await Task.Run(() => { 
-               var a= context.Message;
-            });
         }
     }
 }
