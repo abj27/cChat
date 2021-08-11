@@ -16,7 +16,6 @@ namespace cChat.Bots
             var builder = new ContainerBuilder();
             builder.RegisterType<SendMessageService>().As<ISendMessageService>();
             builder.RegisterType<ActionHandlerService>().As<IActionHandlerService>();
-            builder.RegisterType<Application>();
             builder.RegisterAssemblyTypes(typeof(DefaultActionHandler).Assembly).Where(x => x.Name.EndsWith("ActionHandler")).AsImplementedInterfaces(); 
             builder.AddMassTransit(x =>{
                 x.AddConsumer<BotActionConsumer>();
@@ -37,7 +36,6 @@ namespace cChat.Bots
             var busControl = await SetupMessageBroker(GetDependencyInjectionRoot());
             try
             {
-                await GetDependencyInjectionRoot().Resolve<Application>().Run();
                 Console.WriteLine("Press enter to exit");
                 await Task.Run(() => Console.ReadLine());
             }

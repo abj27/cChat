@@ -26,13 +26,5 @@ namespace cChat.Bots
                var a= context.Message;
             });
         }
-
-        // public async Task Consume(ConsumeContext<BotAction> context)
-        // {
-        //     Console.WriteLine(context.Message.Message);
-        //     await Task.Run(() => { 
-        //        var a= context.Message;
-        //     });
-        // }
     }
 }
