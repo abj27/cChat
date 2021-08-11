@@ -24,7 +24,6 @@ namespace cChat.Data.Services
                     _applicationDbContext.Instance.SaveChanges();
                     transaction.Commit();
                     return result;
-
                 }
                 catch (Exception e)
                 {
@@ -36,10 +35,6 @@ namespace cChat.Data.Services
                     }
                     return default(T);
 
-                }
-                finally
-                {
-                    _applicationDbContext.Instance.Dispose();
                 }
             }
         }

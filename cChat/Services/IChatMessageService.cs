@@ -8,5 +8,6 @@ namespace cChat.Portal.Services
     public interface IChatMessageService
     {
         Task SendParsedMessage(ParsedChatMessage parsedMessage,  IHubClients<IClientProxy> clients);
+        Task SendLatestMessages(string userId, IHubClients<IClientProxy> clients);
     }
 }

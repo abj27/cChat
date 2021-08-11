@@ -29,6 +29,11 @@ namespace cChat.Portal.Hubs
             var parsedMessage = _messageParserService.Parse(message, user);
             await _chatMessageService.SendParsedMessage(parsedMessage, this.Clients);
         }
+        public async Task Connected()
+        {
+            var user = await _userManager.GetUserAsync(Context.User);
+            await _chatMessageService.SendLatestMessages(user.Id, Clients);
+        }
     }
 
 }

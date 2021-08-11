@@ -20,10 +20,10 @@ namespace cChat.Data.Repositories
         {
             return _dbContext.Users.FirstOrDefault(x => x.UserName == "System");
         }
-    }
 
-    public interface IIdentityUserRepository
-    {
-        IdentityUser GetSystemUser();
+        public IdentityUser GetById(string userId)
+        {
+            return _dbContext.Users.FirstOrDefault(x => x.Id== userId);
+        }
     }
 }

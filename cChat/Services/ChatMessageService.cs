@@ -7,7 +7,9 @@ using cChat.Data.Repositories;
 using cChat.Data.Services;
 using cChat.Portal.Hubs;
 using MassTransit;
+using MassTransit.Initializers;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace cChat.Portal.Services
 {
@@ -49,6 +51,19 @@ namespace cChat.Portal.Services
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public async Task SendLatestMessages(string userId, IHubClients<IClientProxy> clients)
+        {
+            var messages = await _chatMessageRepository.GetAll().Where(x => x.ChatRoomId == _chatRoomRepository.GetAll().First().Id)
+                .OrderByDescending(x => x.CreatedDate).Take(50).ToListAsync();
+            await clients.All.SendAsync("LoadMessages",messages.Select(x => new ParsedChatMessage{
+                Type = MessageTypes.ChatMessage,
+                Sender = x.UserId,
+                SenderName =  _userRepository.GetById(x.UserId).UserName,
+                Text = x.Message
+            }));
+        }
+
         private async Task HandleErrorMessage(ParsedChatMessage parsedMessage, IHubClients<IClientProxy> clients)
         {
             await clients.All.SendAsync("ReceiveMessage", parsedMessage);
