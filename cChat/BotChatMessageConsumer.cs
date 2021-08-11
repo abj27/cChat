@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using cChat.Core.DTOs;
 using cChat.Portal.Hubs;
+using cChat.Portal.Services;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 
@@ -8,24 +9,18 @@ namespace cChat.Portal
 {
     public class BotChatMessageConsumer :  IConsumer<ParsedChatMessage>
     {
-        private readonly IHubContext<ChatHub> _chatHub;
+        private readonly IChatMessageService _chatMessageService;
+        private IHubContext<ChatHub> _chatHub;
 
-        // public BotChatMessageConsumer()
-        // {
-
-        // }
-        public BotChatMessageConsumer(IHubContext<ChatHub> chatHub)
+        public BotChatMessageConsumer(IChatMessageService chatMessageService, IHubContext<ChatHub> chatHub)
         {
+            _chatMessageService = chatMessageService;
             _chatHub = chatHub;
         }
+
         public async Task Consume(ConsumeContext<ParsedChatMessage> context)
         {
-            await _chatHub.Clients.All.SendAsync("ReceiveMessage",context.Message);
-            // var connection = new HubConnectionBuilder()
-            //     .WithUrl("http://localhost:5001/ChatHub")
-            //     .Build();
-            // await connection.InvokeAsync("ReceiveMessage",context.Message );
-            // await _chatHub.Clients.All.SendAsync("ReceiveMessage", context.Message);
+             await _chatMessageService.SendParsedMessage(context.Message, _chatHub.Clients);
         }
     }
 

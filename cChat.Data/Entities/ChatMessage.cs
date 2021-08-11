@@ -10,8 +10,6 @@ namespace cChat.Data.Entities
         [MaxLength(450)]
         public string UserId { get; set; }
         public IdentityUser User { get; set; }
-        public int? BotId {get; set;}
-        public  Bot Bot {get; set;}
         [Required]
         public int ChatRoomId {get; set;}
         public ChatRoom ChatRoom {get; set;}

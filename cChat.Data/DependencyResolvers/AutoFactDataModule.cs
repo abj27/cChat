@@ -12,6 +12,7 @@ namespace cChat.Data.DependencyResolvers
             builder.RegisterType<ChatMessageRepository>().As<IChatMessageRepository>();
             builder.RegisterType<TransactionService>().As<ITransactionService>();
             builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>();
+            builder.RegisterType<IdentityUserRepository>().As<IIdentityUserRepository>();
         }
     }
 }

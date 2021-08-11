@@ -23,7 +23,7 @@ namespace cChat.Core.DTOs
             {
                 return null;
             }
-            return $"{Symbol} quote is ${String.Format(closeValue % 1 == 0 ? "{0:N0}" : "{0:N2}", closeValue)} per share.";
+            return $"{Symbol} quote is ${String.Format(closeValue % 1 == 0 ? "{0:N0}" : "{0:N2}", closeValue)} per share";
         }
     }
 }

@@ -21,17 +21,44 @@ namespace cChat.Bots.RobotActionHandlers
 
         public override async Task HandleMessage(string message)
         {
-           var content = await GetUrl(message)
-               .GetStringFromUrlAsync(accept:"text/csv");
-           var quotes = content.FromCsv<IList<StockQuote>>();
-            var outputMessage= "";
-           if(quotes.Any())
+            var content = await GetUrl(message) .GetStringFromUrlAsync(accept:"text/csv");
+            var quotes = content.FromCsv<IList<StockQuote>>();
+            if (quotes.Any())
             {
-              outputMessage = quotes.First().GetQuote();
+                await SendQuoteMessage(quotes, message);
             }
-            // await SendMessageService.Send(new ParsedChatMessage(){ 
-            //     Type = MessageTypes.ErrorMessage,
-            // });
+            else
+            { 
+                await SendErrorMessage(message);
+            }
+        }
+
+        private async Task SendErrorMessage(string message)
+        {
+            await SendMessageService.Send(new ParsedChatMessage()
+            {
+                Type = MessageTypes.ErrorMessage,
+                SenderName = Key,
+                Text = $"We couldn't find a quote for {message}"
+            });
+        }
+
+        private  async Task SendQuoteMessage(IList<StockQuote> quotes, string message)
+        {
+            var outputMessage = quotes.First().GetQuote();
+            if (!string.IsNullOrWhiteSpace(outputMessage))
+            {
+                await SendMessageService.Send(new ParsedChatMessage()
+                {
+                    Type = MessageTypes.ChatMessage,
+                    SenderName = Key,
+                    Text =outputMessage
+                });
+            }
+            else
+            {
+                await SendErrorMessage(message);
+            }
         }
     }
 }

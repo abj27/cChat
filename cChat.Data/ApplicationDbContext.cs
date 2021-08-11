@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using cChat.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -12,7 +13,7 @@ namespace cChat.Data
     {
         DbSet<ChatRoom> ChatRooms { get; set; }
         DbSet<ChatMessage> ChatMessages { get; set; }
-        DbSet<Bot> Bots { get; set; }
+        DbSet<IdentityUser> Users{ get; set; }
         DbContext Instance { get; }
     }
 
@@ -24,7 +25,6 @@ namespace cChat.Data
         }
         public DbSet<ChatRoom> ChatRooms {get; set;}
         public DbSet<ChatMessage> ChatMessages {get; set;}
-        public DbSet<Bot> Bots {get; set;}
         public DbContext Instance => this ;
         public override int SaveChanges()
         {
@@ -43,22 +43,10 @@ namespace cChat.Data
                 ModifiedDate = DateTimeOffset.Now,
                 CreatedDate = DateTimeOffset.Now,
             });
-            //We are generating the default bot and the quotes bot as seed data 
-            modelBuilder.Entity<Bot>().HasData(
-            new Bot{
-                Id = 1,
-                Name = "DefaultBot",
-                ModifiedDate = DateTimeOffset.Now,
-                CreatedDate = DateTimeOffset.Now,
-                Key = ""
-            },
-            new Bot
-            {
-                Id = 2,
-                Name = "StockQuotesBot",
-                ModifiedDate = DateTimeOffset.Now,
-                CreatedDate = DateTimeOffset.Now,
-                Key = "stock"
+            modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser{
+                Id = new Guid().ToString(),
+                UserName= "System",
+                NormalizedUserName= "System",
             });
         }
         private void SetModifiedDate()
